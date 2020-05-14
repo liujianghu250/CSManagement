@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         private void login_Click(object sender, EventArgs e)
         {
             /*
-            SqlConnection Conn = (new getSqlConnection()).GetCon();
+            SqlConnection Conn = (new GetSqlConnection()).GetCon();
             SqlCommand cmd = new SqlCommand("sp_help tb_Company", Conn);
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())

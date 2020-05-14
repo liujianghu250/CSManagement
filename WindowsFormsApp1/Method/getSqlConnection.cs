@@ -6,11 +6,11 @@ using System.Data.SqlClient;
 
 namespace WindowsFormsApp1.Method
 {
-    public class getSqlConnection
+    public class GetSqlConnection
     {
 
         private string connstr = "Data Source=localhost;database=db_CSManage;uid=sa;pwd=sa";
-        public getSqlConnection()
+        public GetSqlConnection()
         {
 
         }
