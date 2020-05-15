@@ -9,3 +9,4 @@ E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.c
 E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.CompanyInfoForm.resources

@@ -16,5 +16,13 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+
+        private void companyMenu_Click(object sender, EventArgs e)
+        {
+            CompanyInfoForm frm = new CompanyInfoForm();
+            frm.Owner = this;
+            frm.ShowDialog();
+        }
     }
 }

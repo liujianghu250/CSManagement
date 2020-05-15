@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.Method;
+using WindowsFormsApp1.GoodMethod;
 using System.Data.SqlClient;
 
 namespace WindowsFormsApp1

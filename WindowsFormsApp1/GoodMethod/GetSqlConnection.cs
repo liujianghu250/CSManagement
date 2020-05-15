@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace WindowsFormsApp1.Method
+namespace WindowsFormsApp1.GoodMethod
 {
     public class GetSqlConnection
     {
