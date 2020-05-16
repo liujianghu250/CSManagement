@@ -53,11 +53,11 @@ namespace WindowsFormsApp1.ClassInfo
             set { ReDateTime = value; }
 
         }
-        private int EmpFalg;
-        public int intEmpFalg
+        private int EmpFlag;
+        public int intEmpFlag
         {
-            get { return EmpFalg; }
-            set { EmpFalg = value; }
+            get { return EmpFlag; }
+            set { EmpFlag = value; }
         }
     }
 }
