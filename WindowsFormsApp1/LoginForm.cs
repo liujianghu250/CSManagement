@@ -21,20 +21,31 @@ namespace WindowsFormsApp1
 
         private void login_Click(object sender, EventArgs e)
         {
-            /*
-            SqlConnection Conn = (new GetSqlConnection()).GetCon();
-            SqlCommand cmd = new SqlCommand("sp_help tb_Company", Conn);
-            SqlDataReader dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
+
+            //开发测试阶段无需对用户名与密码进行验证。
+            /////////////////////////////////////////
+            /* 
+             *
+            if(userName.Text == "")
             {
-               textBox1.Text += dataReader[0].ToString();
+                MessageBox.Show("用户名不能为空！");
+                return;
             }
-            dataReader.Close();
-            Conn.Close();
-            */
-            MainForm frm = new MainForm();
-            frm.Show();
-            this.Hide();
+            if(password.Text == "")
+            {
+                MessageBox.Show("密码不能为空！");
+                return;
+            }
+           
+            if(new tb_EmployeeMethod().Find(userName.Text,password.Text) == true)
+             */
+            {
+                MainForm frm = new MainForm();
+                frm.Show();
+                this.Hide();
+            }
+          
+
         }
     }
 }

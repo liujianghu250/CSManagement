@@ -14,8 +14,59 @@ namespace WindowsFormsApp1.GoodMethod
     {
         public string tb_CompanyID()
         {
+            int intYear = DateTime.Now.Day;
+            int intMonth = DateTime.Now.Month;
+            int intDate = DateTime.Now.Year;
+            int intHour = DateTime.Now.Hour;
+            int intSecond = DateTime.Now.Second;
+            int intMinute = DateTime.Now.Minute;
+            string strTime = null;
+            strTime = intYear.ToString();
+            if (intMonth < 10)
+            {
+                strTime += "0" + intMonth.ToString();
+            }
+            else
+            {
+                strTime += intMonth.ToString();
+            }
+            if (intDate < 10)
+            {
+                strTime += "0" + intDate.ToString();
+            }
+            else
+            {
+                strTime += intDate.ToString();
+            }
+            if (intHour < 10)
+            {
+                strTime += "0" + intHour.ToString();
+            }
+            else
+            {
+                strTime += intHour.ToString();
+            }
+            if (intMinute < 10)
+            {
 
-            return "testid";
+                strTime += "0" + intMinute.ToString();
+            }
+            else
+            {
+                strTime += intMinute.ToString();
+            }
+            if (intSecond < 10)
+            {
+
+                strTime += "0" + intSecond.ToString();
+            }
+            else
+            {
+                strTime += intSecond.ToString();
+            }
+
+
+            return ("KH-" + strTime);
         }
         //添加
         public Boolean Add(tb_Company company)

@@ -60,7 +60,6 @@ namespace WindowsFormsApp1
         private void FillControls()
         {
             int curRow = dataGridView1.CurrentCell.RowIndex;
-
             companyNameBox.Text = dataGridView1[1, curRow].Value.ToString();
             companyDirectorBox.Text = dataGridView1[2, curRow].Value.ToString(); 
             companyPhoneBox.Text = dataGridView1[3, curRow].Value.ToString(); 
@@ -99,6 +98,10 @@ namespace WindowsFormsApp1
                 if (flag == FlagType.Add)
                 {
                     company.intCompanyID = comMethod.tb_CompanyID();
+                }
+                else
+                {
+                    company.intCompanyID = this.dataGridView1[0, this.dataGridView1.CurrentCell.RowIndex].Value.ToString();
                 }
             }
             else if(flag == FlagType.Delete)
@@ -185,7 +188,7 @@ namespace WindowsFormsApp1
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            ClearControls();
+            //ClearControls();
             ControlStatus();
             flag = FlagType.Delete;
         }
