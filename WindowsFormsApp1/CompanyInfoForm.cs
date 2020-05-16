@@ -136,6 +136,7 @@ namespace WindowsFormsApp1
                         ControlStatus();
                         BoxStatus();
                         break;
+
                     case FlagType.Delete:
                         if (comMethod.Delete(company))
                         {
@@ -149,8 +150,8 @@ namespace WindowsFormsApp1
                         comMethod.Find(dataGridView1);
                         ClearControls();
                         ControlStatus();
-                        BoxStatus();
                         break;
+
                     case FlagType.Update:
                         if (comMethod.Update(company))
                         {
@@ -163,8 +164,10 @@ namespace WindowsFormsApp1
                         flag = FlagType.Begin;
                         comMethod.Find(dataGridView1);
                         ClearControls();
+                        BoxStatus();
                         ControlStatus();
                         break;
+
                     default:
                         break;
                 }
