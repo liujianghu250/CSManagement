@@ -1,0 +1,272 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using WindowsFormsApp1.Method;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
+using System.Threading;
+
+namespace WindowsFormsApp1
+{
+    public partial class JhGoodsForm : Form
+    {
+        public JhGoodsForm()
+        {
+            InitializeComponent();
+            UpdateListView();
+            
+        }
+        public JhGoodsForm(string EmpID):this()
+        {
+            txtEmpID.Text = EmpID;//从登陆界面读取工作人员名。
+        }
+        private void button1_Click(object sender, EventArgs e)//处理新增进货按钮
+        {
+            InsertIntoSql();
+            UpdateListView();
+
+        }
+        private void txtGoodsID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private int StringToInt(string source)//功能函数，string型转int型
+        {
+            int result = 0;
+            for (int i = 0; i < source.Length; i++)
+                result = result * 10 + (source[i] - '0');
+            return result;
+        }
+        private double StringToDouble(string source)//功能函数，string型转double型
+        {
+            if (source.IndexOf('.') == -1)
+                return (double)StringToInt(source);
+            else
+            {
+                double result = 0;
+                int i;
+                for(i=0;source[i]!='.';i++)
+                {
+                    result = result * 10 + (source[i] - '0');
+                }
+                
+                int potPosition = ++i;
+                for(;i<source.Length;i++)
+                {
+                    result = result * 10 + (source[i] - '0');
+                }
+                for(int j=0;j<source.Length-potPosition;j++)
+                {
+                    result /= 10;
+                }
+                return result;
+            }
+        }
+        private void InsertIntoSql()//功能函数，执行数据库插入语句，同时会检查输入是否正确。
+        {
+            if(!InfoCheck())
+            {
+                MessageBox.Show("信息错误:信息空缺或错误！");
+                return;
+            }
+            SqlConnection sqlConnection = new getSqlConnection().GetCon();//连接数据库
+
+            string sql = "Insert into dbo.tb_JhGoodsInfo(GoodsID,EmpID,JhCompName,DepotName,GoodsName,GoodsNum,GoodsUnit,GoodsJhPrice,GoodsSellPrice," +
+                "GoodsNeedPrice,GoodsNoPrice,GoodsRemark,GoodsTime,Flag)values(@GoodsID,@EmpID,@JhCompName,@DepotName,@GoodsName,@GoodsNum,@GoodsUnit," +
+                "@GoodsJhPrice,@GoodsSellPrice,@GoodsNeedPrice,@GoodsNoPrice,@GoodsRemark,@GoodsTime,@Flag)";
+            SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+            sqlCommand.Prepare();
+            sqlCommand.Parameters.AddWithValue("@GoodsID", txtGoodsID.Text);
+            sqlCommand.Parameters.AddWithValue("@EmpID", txtEmpID.Text);
+            sqlCommand.Parameters.AddWithValue("@JhCompName", txtJhCompName.Text);
+            sqlCommand.Parameters.AddWithValue("@DepotName", txtDepotName.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsName", txtGoodsName.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsNum", StringToInt(txtGoodsNum.Text));
+            sqlCommand.Parameters.AddWithValue("@GoodsUnit", txtGoodsUnit.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsJhPrice", txtGoodsJhPrice.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsSellPrice", txtGoodsSellPrice.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsNeedPrice", txtGoodsNeedPrice.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsNoPrice", txtGoodsNoPrice.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsRemark", txtGoodsRemark.Text);
+            sqlCommand.Parameters.AddWithValue("@GoodsTime", txtGoodsTime.Value);
+            sqlCommand.Parameters.AddWithValue("@Flag", 0);
+            try
+            { int r = sqlCommand.ExecuteNonQuery(); }
+            catch(SqlException)
+            {
+                MessageBox.Show("插入信息错误，请检查是否商品编号重复");
+                //打开查询界面
+
+            }
+            sqlConnection.Close();
+        }
+        private void DeleteByGoodsID()//功能函数，执行数据库删除语句
+        {
+            try
+            {
+                SqlConnection sqlConnection = new getSqlConnection().GetCon();//连接数据库
+                string sql = "delete from dbo.tb_JhGoodsInfo where GoodsID=" + txtGoodsID.Text;
+                SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+                sqlCommand.Prepare();
+                sqlCommand.ExecuteNonQuery();
+
+                sqlConnection.Close();
+            }
+            catch(SqlException)
+            {
+                MessageBox.Show("数据库连接失败！");
+            }  
+        }
+        private void UpdateListView()//功能函数，随着数据库语句的执行，刷新ListView
+        {
+            listView1.Items.Clear();
+            try
+            {
+                SqlConnection sqlConnection = new getSqlConnection().GetCon();//连接数据库
+                SqlCommand cmd = new SqlCommand("select * from dbo.tb_JhGoodsInfo", sqlConnection);
+                SqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    ListViewItem item = new ListViewItem((string)dataReader["GoodsID"]);
+                    item.SubItems.Add((string)dataReader["GoodsName"]);
+                    item.SubItems.Add((string)dataReader["JhCompName"]);
+                    item.SubItems.Add((string)dataReader["DepotName"]);
+                    item.SubItems.Add(dataReader["GoodsNum"].ToString());
+                    item.SubItems.Add((string)dataReader["GoodsUnit"]);
+                    item.SubItems.Add((string)dataReader["GoodsJhPrice"]);
+                    item.SubItems.Add((string)dataReader["GoodsSellPrice"]);
+                    item.SubItems.Add((string)dataReader["GoodsNeedPrice"]);
+                    item.SubItems.Add((string)dataReader["GoodsNoPrice"]);
+                    listView1.Items.Add(item);
+                }
+                dataReader.Close();
+                sqlConnection.Close();
+            }
+            catch(SqlException)
+            {
+                MessageBox.Show("数据库连接失败");
+            }
+            
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)//ListView选其中一行，将其数据复制到文本框中
+        {
+            if (listView1.SelectedItems.Count == 0)
+                return;
+            txtGoodsID.Text= listView1.SelectedItems[0].Text;
+            txtGoodsName.Text = listView1.SelectedItems[0].SubItems[1].Text;
+            txtJhCompName.Text= listView1.SelectedItems[0].SubItems[2].Text;
+            txtDepotName.Text= listView1.SelectedItems[0].SubItems[3].Text;
+            txtGoodsNum.Text= listView1.SelectedItems[0].SubItems[4].Text;
+            txtGoodsUnit.Text= listView1.SelectedItems[0].SubItems[5].Text;
+            txtGoodsJhPrice.Text= listView1.SelectedItems[0].SubItems[6].Text;
+            txtGoodsSellPrice.Text= listView1.SelectedItems[0].SubItems[7].Text;
+            //txtGoodsNeedPrice.Text= listView1.SelectedItems[0].SubItems[8].Text;
+            txtGoodsNoPrice.Text= listView1.SelectedItems[0].SubItems[9].Text;
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)//修改进货按钮
+        {
+            DeleteByGoodsID();
+            InsertIntoSql();
+            UpdateListView();
+        }
+
+        private void button3_Click(object sender, EventArgs e)//删除进货按钮
+        {
+            DeleteByGoodsID();
+            UpdateListView();
+        }
+
+        private void txtJhCompName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtGoodsNum_TextChanged(object sender, EventArgs e)//单价*数量=应付价格，随着文本框的写入自动更新应付价格
+        {
+            if (txtGoodsJhPrice.Text != "")
+                SetGoodsNeedPrice();
+        }
+
+        private void txtGoodsJhPrice_TextChanged(object sender, EventArgs e)//单价*数量=应付价格，随着文本框的写入自动更新应付价格
+        {
+            if (txtGoodsNum.Text != "")
+                SetGoodsNeedPrice();
+        }
+        private void SetGoodsNeedPrice()//功能函数，设置应付价格
+        {
+            double result = StringToInt(txtGoodsNum.Text) * StringToDouble(txtGoodsJhPrice.Text);
+            txtGoodsNeedPrice.Text = result.ToString();
+        }
+        private Boolean InfoCheck()//所有文本框中的信息检查，正确返回true
+        {
+            Boolean isRightInput = true;
+            if (txtGoodsID.Text == "")
+                isRightInput = false;
+            if (!GoodsIDCheck(txtGoodsID.Text))
+                isRightInput = false;
+            if (!IntegralNumberCheck(txtGoodsNum.Text))
+                isRightInput = false;
+            if (!NumberCheck(txtGoodsJhPrice.Text))
+                isRightInput = false;
+            if (!NumberCheck(txtGoodsSellPrice.Text))
+                isRightInput = false;
+            if (!NumberCheck(txtGoodsNoPrice.Text))
+                isRightInput = false;
+
+            return isRightInput;
+        }
+        private Boolean NumberCheck(string source)//数字检测，价格应为整数或者小数
+        {
+            string pattern = @"^\d+(\.\d+)?$";
+            Match mc = Regex.Match(source, pattern);
+            if (mc.ToString() == "")
+                return false;
+            else
+                return true;
+        }
+        private Boolean IntegralNumberCheck(string source)//整数检测，数量应为整数
+        {
+            string pattern = @"^\d+$";
+            Match mc = Regex.Match(source, pattern);
+            if (mc.ToString() == "")
+                return false;
+            else
+                return true;
+        }
+        private Boolean GoodsIDCheck(string source)//商品编号检测，商品编号必须为7位数字
+        {
+            string pattern = @"^\d{7}$";
+            Match mc = Regex.Match(source, pattern);
+            if (mc.ToString() == "")
+                return false;
+            else
+                return true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            Thread thread = new Thread(() =>
+            {
+
+                this.Invoke(new Action(() =>
+                {
+                    JhQueryGoodsForm jhQueryGoodsForm = new JhQueryGoodsForm(txtGoodsID.Text);
+                    jhQueryGoodsForm.Show();
+                }));
+                
+            });
+            
+            this.Show();
+        }
+    }
+}
