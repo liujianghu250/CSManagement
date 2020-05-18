@@ -34,7 +34,9 @@ namespace WindowsFormsApp1
 
         private void goodsPurchaseMenuItem_Click(object sender, EventArgs e)
         {
-
+            JhGoodsForm jhGoodsForm = new JhGoodsForm("YH");
+            jhGoodsForm.Owner = this;
+            jhGoodsForm.ShowDialog();
         }
 
         private void GoodsInfoMenuItem_Click(object sender, EventArgs e)

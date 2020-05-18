@@ -40,13 +40,14 @@ namespace WindowsFormsApp1
             if(new tb_EmployeeMethod().Find(userName.Text,password.Text) == true)
              */
             {
-                JhGoodsForm jhGoodsForm = new JhGoodsForm("YH");
-                jhGoodsForm.Show();
+                MainForm frm = new MainForm();
+                frm.Show();
+                //JhGoodsForm jhGoodsForm = new JhGoodsForm("YH");
+                //jhGoodsForm.Show();
                 /*CompanyInfoForm companyInfoForm = new CompanyInfoForm();
                 companyInfoForm.Show();*/
-                /*MainForm frm = new MainForm();
-                frm.Show();
-                this.Hide();*/
+
+                this.Hide();
             }
           
 
