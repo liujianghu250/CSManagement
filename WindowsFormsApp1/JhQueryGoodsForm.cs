@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using WindowsFormsApp1.Method;
+using WindowsFormsApp1.GoodMethod;
 
 namespace WindowsFormsApp1
 {
@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         private void buttonQuery_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            SqlConnection sqlConnection = new getSqlConnection().GetCon();
+            SqlConnection sqlConnection = new GetSqlConnection().GetCon();
             string sql = "select * from dbo.tb_JhGoodsInfo where ";
             switch(txtQueryKind.SelectedIndex)
             {

@@ -70,14 +70,14 @@
             // employeeMenuItem
             // 
             this.employeeMenuItem.Name = "employeeMenuItem";
-            this.employeeMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.employeeMenuItem.Size = new System.Drawing.Size(181, 26);
             this.employeeMenuItem.Text = "员工信息[&E]";
             this.employeeMenuItem.Click += new System.EventHandler(this.employeeMenuItem_Click);
             // 
             // companyMenuItem
             // 
             this.companyMenuItem.Name = "companyMenuItem";
-            this.companyMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.companyMenuItem.Size = new System.Drawing.Size(181, 26);
             this.companyMenuItem.Text = "供应商信息[&Q]";
             this.companyMenuItem.Click += new System.EventHandler(this.companyMenuItem_Click);
             // 
@@ -89,6 +89,7 @@
             this.进货管理ToolStripMenuItem.Name = "进货管理ToolStripMenuItem";
             this.进货管理ToolStripMenuItem.Size = new System.Drawing.Size(101, 24);
             this.进货管理ToolStripMenuItem.Text = "进货管理[&C]";
+            this.进货管理ToolStripMenuItem.Click += new System.EventHandler(this.进货管理ToolStripMenuItem_Click);
             // 
             // goodsPurchaseMenuItem
             // 
@@ -116,14 +117,14 @@
             // SellGoodsMenuItem
             // 
             this.SellGoodsMenuItem.Name = "SellGoodsMenuItem";
-            this.SellGoodsMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.SellGoodsMenuItem.Size = new System.Drawing.Size(166, 26);
             this.SellGoodsMenuItem.Text = "商品销售[&G]";
             this.SellGoodsMenuItem.Click += new System.EventHandler(this.SellGoodsMenuItem_Click);
             // 
             // ReturnGoodsMenuItem
             // 
             this.ReturnGoodsMenuItem.Name = "ReturnGoodsMenuItem";
-            this.ReturnGoodsMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.ReturnGoodsMenuItem.Size = new System.Drawing.Size(166, 26);
             this.ReturnGoodsMenuItem.Text = "商品退货[&O]";
             this.ReturnGoodsMenuItem.Click += new System.EventHandler(this.ReturnGoodsMenuItem_Click);
             // 
@@ -139,14 +140,14 @@
             // 库存查询ToolStripMenuItem
             // 
             this.库存查询ToolStripMenuItem.Name = "库存查询ToolStripMenuItem";
-            this.库存查询ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.库存查询ToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.库存查询ToolStripMenuItem.Text = "库存查询[&M]";
             this.库存查询ToolStripMenuItem.Click += new System.EventHandler(this.库存查询ToolStripMenuItem_Click);
             // 
             // 库存报警ToolStripMenuItem
             // 
             this.库存报警ToolStripMenuItem.Name = "库存报警ToolStripMenuItem";
-            this.库存报警ToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.库存报警ToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.库存报警ToolStripMenuItem.Text = "库存报警[&J]";
             this.库存报警ToolStripMenuItem.Click += new System.EventHandler(this.库存报警ToolStripMenuItem_Click);
             // 

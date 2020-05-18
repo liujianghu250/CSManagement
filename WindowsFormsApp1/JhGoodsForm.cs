@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.Method;
+using WindowsFormsApp1.GoodMethod;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -22,28 +22,28 @@ namespace WindowsFormsApp1
             UpdateListView();
             
         }
+        //主要使用此构造方法
         public JhGoodsForm(string EmpID):this()
         {
-            txtEmpID.Text = EmpID;//从登陆界面读取工作人员名。
+            //从登陆界面读取工作人员名。
+            txtEmpID.Text = EmpID;
         }
-        private void button1_Click(object sender, EventArgs e)//处理新增进货按钮
-        {
-            InsertIntoSql();
-            UpdateListView();
 
-        }
         private void txtGoodsID_TextChanged(object sender, EventArgs e)
         {
 
         }
-        private int StringToInt(string source)//功能函数，string型转int型
+        //功能函数，string型转int型
+        private int StringToInt(string source)
         {
             int result = 0;
             for (int i = 0; i < source.Length; i++)
                 result = result * 10 + (source[i] - '0');
             return result;
         }
-        private double StringToDouble(string source)//功能函数，string型转double型
+
+        //功能函数，string型转double型
+        private double StringToDouble(string source)
         {
             if (source.IndexOf('.') == -1)
                 return (double)StringToInt(source);
@@ -68,14 +68,15 @@ namespace WindowsFormsApp1
                 return result;
             }
         }
-        private void InsertIntoSql()//功能函数，执行数据库插入语句，同时会检查输入是否正确。
+        //功能函数，执行数据库插入语句，同时会检查输入是否正确。
+        private void InsertIntoSql()
         {
             if(!InfoCheck())
             {
                 MessageBox.Show("信息错误:信息空缺或错误！");
                 return;
             }
-            SqlConnection sqlConnection = new getSqlConnection().GetCon();//连接数据库
+            SqlConnection sqlConnection = new GetSqlConnection().GetCon();//连接数据库
 
             string sql = "Insert into dbo.tb_JhGoodsInfo(GoodsID,EmpID,JhCompName,DepotName,GoodsName,GoodsNum,GoodsUnit,GoodsJhPrice,GoodsSellPrice," +
                 "GoodsNeedPrice,GoodsNoPrice,GoodsRemark,GoodsTime,Flag)values(@GoodsID,@EmpID,@JhCompName,@DepotName,@GoodsName,@GoodsNum,@GoodsUnit," +
@@ -106,11 +107,12 @@ namespace WindowsFormsApp1
             }
             sqlConnection.Close();
         }
-        private void DeleteByGoodsID()//功能函数，执行数据库删除语句
+        //功能函数，执行数据库删除语句
+        private void DeleteByGoodsID()
         {
             try
             {
-                SqlConnection sqlConnection = new getSqlConnection().GetCon();//连接数据库
+                SqlConnection sqlConnection = new GetSqlConnection().GetCon();//连接数据库
                 string sql = "delete from dbo.tb_JhGoodsInfo where GoodsID=" + txtGoodsID.Text;
                 SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
                 sqlCommand.Prepare();
@@ -123,12 +125,13 @@ namespace WindowsFormsApp1
                 MessageBox.Show("数据库连接失败！");
             }  
         }
-        private void UpdateListView()//功能函数，随着数据库语句的执行，刷新ListView
+        //功能函数，随着数据库语句的执行，刷新ListView
+        private void UpdateListView()
         {
             listView1.Items.Clear();
             try
             {
-                SqlConnection sqlConnection = new getSqlConnection().GetCon();//连接数据库
+                SqlConnection sqlConnection = new GetSqlConnection().GetCon();//连接数据库
                 SqlCommand cmd = new SqlCommand("select * from dbo.tb_JhGoodsInfo", sqlConnection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -136,6 +139,7 @@ namespace WindowsFormsApp1
                     ListViewItem item = new ListViewItem((string)dataReader["GoodsID"]);
                     item.SubItems.Add((string)dataReader["GoodsName"]);
                     item.SubItems.Add((string)dataReader["JhCompName"]);
+                    item.SubItems.Add((string)dataReader["EmpID"]);
                     item.SubItems.Add((string)dataReader["DepotName"]);
                     item.SubItems.Add(dataReader["GoodsNum"].ToString());
                     item.SubItems.Add((string)dataReader["GoodsUnit"]);
@@ -155,7 +159,8 @@ namespace WindowsFormsApp1
             
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)//ListView选其中一行，将其数据复制到文本框中
+        //ListView选其中一行，将其数据复制到文本框中
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 0)
                 return;
@@ -171,32 +176,22 @@ namespace WindowsFormsApp1
             txtGoodsNoPrice.Text= listView1.SelectedItems[0].SubItems[9].Text;
 
         }
-
-        private void button2_Click(object sender, EventArgs e)//修改进货按钮
-        {
-            DeleteByGoodsID();
-            InsertIntoSql();
-            UpdateListView();
-        }
-
-        private void button3_Click(object sender, EventArgs e)//删除进货按钮
-        {
-            DeleteByGoodsID();
-            UpdateListView();
-        }
+        
 
         private void txtJhCompName_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void txtGoodsNum_TextChanged(object sender, EventArgs e)//单价*数量=应付价格，随着文本框的写入自动更新应付价格
+        //单价*数量=应付价格，随着文本框的写入自动更新应付价格
+        private void txtGoodsNum_TextChanged(object sender, EventArgs e)
         {
             if (txtGoodsJhPrice.Text != "")
                 SetGoodsNeedPrice();
         }
 
-        private void txtGoodsJhPrice_TextChanged(object sender, EventArgs e)//单价*数量=应付价格，随着文本框的写入自动更新应付价格
+        //单价*数量=应付价格，随着文本框的写入自动更新应付价格
+        private void txtGoodsJhPrice_TextChanged(object sender, EventArgs e)
         {
             if (txtGoodsNum.Text != "")
                 SetGoodsNeedPrice();
@@ -206,15 +201,20 @@ namespace WindowsFormsApp1
             double result = StringToInt(txtGoodsNum.Text) * StringToDouble(txtGoodsJhPrice.Text);
             txtGoodsNeedPrice.Text = result.ToString();
         }
-        private Boolean InfoCheck()//所有文本框中的信息检查，正确返回true
+        //所有文本框中的信息检查，正确返回true
+        private Boolean InfoCheck()
         {
             Boolean isRightInput = true;
+            //商品编号不能为空
             if (txtGoodsID.Text == "")
                 isRightInput = false;
+            //商品编号必须为7为数字
             if (!GoodsIDCheck(txtGoodsID.Text))
                 isRightInput = false;
+            //数量必须为整数
             if (!IntegralNumberCheck(txtGoodsNum.Text))
                 isRightInput = false;
+            //价格必须是数
             if (!NumberCheck(txtGoodsJhPrice.Text))
                 isRightInput = false;
             if (!NumberCheck(txtGoodsSellPrice.Text))
@@ -224,7 +224,8 @@ namespace WindowsFormsApp1
 
             return isRightInput;
         }
-        private Boolean NumberCheck(string source)//数字检测，价格应为整数或者小数
+        //数字检测，价格应为整数或者小数
+        private Boolean NumberCheck(string source)
         {
             string pattern = @"^\d+(\.\d+)?$";
             Match mc = Regex.Match(source, pattern);
@@ -233,7 +234,8 @@ namespace WindowsFormsApp1
             else
                 return true;
         }
-        private Boolean IntegralNumberCheck(string source)//整数检测，数量应为整数
+        //整数检测，数量应为整数
+        private Boolean IntegralNumberCheck(string source)
         {
             string pattern = @"^\d+$";
             Match mc = Regex.Match(source, pattern);
@@ -242,7 +244,8 @@ namespace WindowsFormsApp1
             else
                 return true;
         }
-        private Boolean GoodsIDCheck(string source)//商品编号检测，商品编号必须为7位数字
+        //商品编号检测，商品编号必须为7位数字
+        private Boolean GoodsIDCheck(string source)
         {
             string pattern = @"^\d{7}$";
             Match mc = Regex.Match(source, pattern);
@@ -252,21 +255,82 @@ namespace WindowsFormsApp1
                 return true;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        //删除按钮
+        private void deleteButton_Click(object sender, EventArgs e)
         {
-            
-            Thread thread = new Thread(() =>
+            DeleteByGoodsID();
+            UpdateListView();
+        }
+        //增加按钮
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            InsertIntoSql();
+            UpdateListView();
+        }
+        //修改按钮
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            DeleteByGoodsID();
+            InsertIntoSql();
+            UpdateListView();
+        }
+        //查询按钮
+        private void queryButton_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            SqlConnection sqlConnection = new GetSqlConnection().GetCon();
+            string sql = "select * from dbo.tb_JhGoodsInfo where ";
+            switch (keyType.SelectedIndex)
             {
-
-                this.Invoke(new Action(() =>
+                case 0: { sql += "GoodsID LIKE \'%" + keyText.Text + "%\'"; break; }
+                case 1: { sql += "GoodsName LIKE \'%" + keyText.Text + "%\'"; break; }
+                case 2: { sql += "JhCompName LIKE \'%" + keyText.Text + "%\'"; break; }
+                case 3: { sql += "EmpID LIKE \'%" + keyText.Text + "%\'"; break; }
+                case 4: { sql += "DepotName LIKE \'%" + keyText.Text + "%\'"; break; }
+                default: { break; }
+            }
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, sqlConnection);
+                SqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    JhQueryGoodsForm jhQueryGoodsForm = new JhQueryGoodsForm(txtGoodsID.Text);
-                    jhQueryGoodsForm.Show();
-                }));
-                
-            });
-            
-            this.Show();
+                    
+                    ListViewItem item = new ListViewItem((string)dataReader["GoodsID"]);
+                    item.SubItems.Add((string)dataReader["GoodsName"]);
+                    item.SubItems.Add((string)dataReader["JhCompName"]);
+                    item.SubItems.Add((string)dataReader["EmpID"]);
+                    item.SubItems.Add((string)dataReader["DepotName"]);
+                    item.SubItems.Add(dataReader["GoodsNum"].ToString());
+                    item.SubItems.Add((string)dataReader["GoodsUnit"]);
+                    item.SubItems.Add((string)dataReader["GoodsJhPrice"]);
+                    item.SubItems.Add((string)dataReader["GoodsSellPrice"]);
+                    item.SubItems.Add((string)dataReader["GoodsNeedPrice"]);
+                    item.SubItems.Add((string)dataReader["GoodsNoPrice"]);
+                    listView1.Items.Add(item);
+                }
+                if (!dataReader.HasRows)
+                {
+                    ListViewItem item = new ListViewItem("无查询结果");
+                    listView1.Items.Add(item);
+                }
+                dataReader.Close();
+                sqlConnection.Close();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("错误！\n输入正确类型！");
+            }
+        }
+        //退出按钮
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void keyType_Click(object sender, EventArgs e)
+        {
+            keyType.Text = keyType.SelectedText;
         }
     }
 }
