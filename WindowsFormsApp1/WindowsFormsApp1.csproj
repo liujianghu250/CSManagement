@@ -63,6 +63,18 @@
     <Compile Include="GoodMethod\tb_CompanyMethod.cs" />
     <Compile Include="GoodMethod\GetSqlConnection.cs" />
     <Compile Include="GoodMethod\tb_EmployeeMethod.cs" />
+    <Compile Include="JhGoodsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JhGoodsForm.Designer.cs">
+      <DependentUpon>JhGoodsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JhQueryGoodsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JhQueryGoodsForm.Designer.cs">
+      <DependentUpon>JhQueryGoodsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +100,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeInfoForm.resx">
       <DependentUpon>EmployeeInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JhGoodsForm.resx">
+      <DependentUpon>JhGoodsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JhQueryGoodsForm.resx">
+      <DependentUpon>JhQueryGoodsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -120,6 +138,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\pictures\保存图标.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\查找.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\红色保存图标.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\取消.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\删除.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\添加.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\退出.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pictures\修改.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

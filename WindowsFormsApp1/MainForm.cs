@@ -61,5 +61,10 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void 进货管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

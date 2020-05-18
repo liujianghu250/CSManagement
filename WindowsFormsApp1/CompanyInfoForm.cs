@@ -246,5 +246,10 @@ namespace WindowsFormsApp1
         {
             this.Close();
         }
+
+        private void keyWordBox_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
