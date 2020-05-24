@@ -28,3 +28,4 @@ E:\work\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.JhQueryGoodsFor
 E:\work\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
 E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.JhGoodsForm.resources
 E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.JhQueryGoodsForm.resources
+E:\Study\C#\大作业\CSManagement\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.DataBackupForm.resources

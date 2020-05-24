@@ -68,5 +68,12 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void DataBackupMenuItem_Click(object sender, EventArgs e)
+        {
+            DataBackupForm frm = new DataBackupForm();
+            frm.Owner = this;
+            frm.ShowDialog();
+        }
     }
 }

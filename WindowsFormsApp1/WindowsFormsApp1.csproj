@@ -54,6 +54,12 @@
     <Compile Include="CompanyInfoForm.Designer.cs">
       <DependentUpon>CompanyInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBackupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataBackupForm.Designer.cs">
+      <DependentUpon>DataBackupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </Compile>
     <EmbeddedResource Include="CompanyInfoForm.resx">
       <DependentUpon>CompanyInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataBackupForm.resx">
+      <DependentUpon>DataBackupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeInfoForm.resx">
       <DependentUpon>EmployeeInfoForm.cs</DependentUpon>
