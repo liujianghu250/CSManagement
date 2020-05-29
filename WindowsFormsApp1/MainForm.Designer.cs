@@ -42,8 +42,8 @@
             this.库存查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.库存报警ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DataRecoveryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DataBackupMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DataRecoveryMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,19 +93,18 @@
             this.进货管理ToolStripMenuItem.Name = "进货管理ToolStripMenuItem";
             this.进货管理ToolStripMenuItem.Size = new System.Drawing.Size(101, 24);
             this.进货管理ToolStripMenuItem.Text = "进货管理[&C]";
-            this.进货管理ToolStripMenuItem.Click += new System.EventHandler(this.进货管理ToolStripMenuItem_Click);
             // 
             // goodsPurchaseMenuItem
             // 
             this.goodsPurchaseMenuItem.Name = "goodsPurchaseMenuItem";
-            this.goodsPurchaseMenuItem.Size = new System.Drawing.Size(163, 26);
+            this.goodsPurchaseMenuItem.Size = new System.Drawing.Size(216, 26);
             this.goodsPurchaseMenuItem.Text = "商品进货[&S]";
             this.goodsPurchaseMenuItem.Click += new System.EventHandler(this.goodsPurchaseMenuItem_Click);
             // 
             // GoodsInfoMenuItem
             // 
             this.GoodsInfoMenuItem.Name = "GoodsInfoMenuItem";
-            this.GoodsInfoMenuItem.Size = new System.Drawing.Size(163, 26);
+            this.GoodsInfoMenuItem.Size = new System.Drawing.Size(216, 26);
             this.GoodsInfoMenuItem.Text = "商品查询[&F]";
             this.GoodsInfoMenuItem.Click += new System.EventHandler(this.GoodsInfoMenuItem_Click);
             // 
@@ -164,18 +163,19 @@
             this.系统维护ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.系统维护ToolStripMenuItem.Text = "系统维护";
             // 
-            // DataRecoveryMenuItem
-            // 
-            this.DataRecoveryMenuItem.Name = "DataRecoveryMenuItem";
-            this.DataRecoveryMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.DataRecoveryMenuItem.Text = "数据恢复";
-            // 
             // DataBackupMenuItem
             // 
             this.DataBackupMenuItem.Name = "DataBackupMenuItem";
             this.DataBackupMenuItem.Size = new System.Drawing.Size(216, 26);
             this.DataBackupMenuItem.Text = "数据备份";
             this.DataBackupMenuItem.Click += new System.EventHandler(this.DataBackupMenuItem_Click);
+            // 
+            // DataRecoveryMenuItem
+            // 
+            this.DataRecoveryMenuItem.Name = "DataRecoveryMenuItem";
+            this.DataRecoveryMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.DataRecoveryMenuItem.Text = "数据恢复";
+            this.DataRecoveryMenuItem.Click += new System.EventHandler(this.DataRecoveryMenuItem_Click);
             // 
             // MainForm
             // 

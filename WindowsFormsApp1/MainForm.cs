@@ -68,16 +68,18 @@ namespace WindowsFormsApp1
             frm.ShowDialog();
         }
 
-        private void 进货管理ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void DataBackupMenuItem_Click(object sender, EventArgs e)
         {
             DataBackupForm frm = new DataBackupForm();
             frm.Owner = this;
             frm.ShowDialog();
+        }
+
+        private void DataRecoveryMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
