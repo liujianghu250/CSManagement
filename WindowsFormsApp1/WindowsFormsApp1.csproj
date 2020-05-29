@@ -69,6 +69,18 @@
     <Compile Include="GoodMethod\tb_CompanyMethod.cs" />
     <Compile Include="GoodMethod\GetSqlConnection.cs" />
     <Compile Include="GoodMethod\tb_EmployeeMethod.cs" />
+    <Compile Include="GoodsFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodsFind.Designer.cs">
+      <DependentUpon>GoodsFind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GoodsWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoodsWarning.Designer.cs">
+      <DependentUpon>GoodsWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="JhGoodsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +107,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Query.Designer.cs">
+      <DependentUpon>Query.cs</DependentUpon>
+    </Compile>
     <Compile Include="SellGoodsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeInfoForm.resx">
       <DependentUpon>EmployeeInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodsFind.resx">
+      <DependentUpon>GoodsFind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoodsWarning.resx">
+      <DependentUpon>GoodsWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JhGoodsForm.resx">
       <DependentUpon>JhGoodsForm.cs</DependentUpon>
@@ -132,6 +156,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

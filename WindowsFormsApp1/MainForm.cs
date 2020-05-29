@@ -56,12 +56,16 @@ namespace WindowsFormsApp1
 
         private void 库存查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            GoodsFind frm = new GoodsFind();
+            frm.Owner = this;
+            frm.ShowDialog();
         }
 
         private void 库存报警ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            GoodsWarning frm = new GoodsWarning();
+            frm.Owner = this;
+            frm.ShowDialog();
         }
 
         private void 进货管理ToolStripMenuItem_Click(object sender, EventArgs e)
