@@ -18,7 +18,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-
         private void login_Click(object sender, EventArgs e)
         {
 
@@ -41,6 +40,7 @@ namespace WindowsFormsApp1
              */
             {
                 MainForm frm = new MainForm();
+                frm.curUser = userName.Text;
                 frm.Show();
                 //JhGoodsForm jhGoodsForm = new JhGoodsForm("YH");
                 //jhGoodsForm.Show();

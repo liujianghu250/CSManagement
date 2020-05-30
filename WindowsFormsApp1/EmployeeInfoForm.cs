@@ -48,6 +48,9 @@ namespace WindowsFormsApp1
             loginPwdBox.ReadOnly = !loginPwdBox.ReadOnly;
             phoneBox.ReadOnly = !phoneBox.ReadOnly;
             mobilePhoneBox.ReadOnly = !mobilePhoneBox.ReadOnly;
+            sexBox.Enabled = !sexBox.Enabled;
+            deptBox.ReadOnly = !deptBox.ReadOnly;
+            postBox.ReadOnly = !postBox.ReadOnly;
         }
         private void ClearControls()
         {
@@ -65,10 +68,14 @@ namespace WindowsFormsApp1
             empNameBox.Text = dataGridView1[1, curRow].Value.ToString();
             loginNameBox.Text = dataGridView1[2, curRow].Value.ToString();
             loginPwdBox.Text = dataGridView1[3, curRow].Value.ToString();
+            sexBox.Text = dataGridView1[4, curRow].Value.ToString();
             dateTimePicker1.Value = Convert.ToDateTime(dataGridView1[5, curRow].Value.ToString());
+            deptBox.Text = dataGridView1[6, curRow].Value.ToString();
+            postBox.Text = dataGridView1[7, curRow].Value.ToString();
             phoneBox.Text = dataGridView1[8, curRow].Value.ToString();
             mobilePhoneBox.Text = dataGridView1[9, curRow].Value.ToString();
             empAddrBox.Text = dataGridView1[10, curRow].Value.ToString();
+
         }
 
         private Boolean CheckData()
@@ -77,7 +84,7 @@ namespace WindowsFormsApp1
             {
                 if (empNameBox.Text == "")
                 {
-                    MessageBox.Show("供应商名称不能为空！", "提示");
+                    MessageBox.Show("姓名不能为空！", "提示");
                     return false;
                 }
                 if (phoneBox.Text == "")
@@ -85,6 +92,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("联系电话不能为空！", "提示");
                     return false;
                 }
+
                 employee.strEmpAddress = empAddrBox.Text;
                 employee.strEmpName = empNameBox.Text;
                 employee.strEmpPhone = phoneBox.Text;
@@ -92,6 +100,10 @@ namespace WindowsFormsApp1
                 employee.strEmpLoginPwd = loginPwdBox.Text;
                 employee.strEmpPhoneM = mobilePhoneBox.Text;
                 employee.daEmpBirthday = dateTimePicker1.Value;
+
+                employee.intEmpSex = sexBox.Text;
+                employee.strEmpDept = deptBox.Text;
+                employee.strEmpPost = postBox.Text;
                 if (flag == FlagType.Add)
                 {
                     employee.intEmpID = empMethod.tb_employeeID();
@@ -105,7 +117,7 @@ namespace WindowsFormsApp1
             {
                 if (empNameBox.Text == "")
                 {
-                    MessageBox.Show("供应商名称不能为空！请选择要删除的的记录", "提示");
+                    MessageBox.Show("请选择要删除的的记录", "提示");
                     return false;
                 }
                 employee.intEmpFlag = 1;
@@ -154,14 +166,11 @@ namespace WindowsFormsApp1
             string keyType;
             switch (keyTypeBox.Text)
             {
-                case "供应商名称":
-                    keyType = "empName";
-                    break;
-                case "负责人姓名":
-                    keyType = "empDirector";
+                case "员工姓名":
+                    keyType = "EmpName";
                     break;
                 case "编号":
-                    keyType = "empID";
+                    keyType = "EmpID";
                     break;
                 default:
                     MessageBox.Show("请选择查询条件！");

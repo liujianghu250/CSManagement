@@ -17,12 +17,20 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        public string curUser; //当前登录的用户
 
         private void employeeMenuItem_Click(object sender, EventArgs e)
         {
-            EmployeeInfoForm frm = new EmployeeInfoForm();
-            frm.Owner = this;
-            frm.ShowDialog();
+            //if(curUser == "root")
+            {
+                EmployeeInfoForm frm = new EmployeeInfoForm();
+                frm.Owner = this;
+                frm.ShowDialog();
+            }
+            //else
+            {
+            //    MessageBox.Show("当前登录账号没有访问该功能的权限");
+            }
         }
 
         private void companyMenuItem_Click(object sender, EventArgs e)
@@ -79,7 +87,16 @@ namespace WindowsFormsApp1
 
         private void DataRecoveryMenuItem_Click(object sender, EventArgs e)
         {
-
+            //if(curUser == "root")
+            {
+                DataRestore frm = new DataRestore();
+                frm.Owner = this;
+                frm.ShowDialog();
+            }
+            //else
+            {
+            //    MessageBox.Show("当前登录账号没有访问该功能的权限");
+            }
         }
     }
 }

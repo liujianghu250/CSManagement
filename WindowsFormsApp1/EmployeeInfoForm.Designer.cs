@@ -41,6 +41,17 @@
             this.searchButton = new System.Windows.Forms.ToolStripButton();
             this.exitButton = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.empID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.empName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loginName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loginPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.post = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.家庭电话 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loginPwdBox = new System.Windows.Forms.TextBox();
             this.loginNameBox = new System.Windows.Forms.TextBox();
             this.empAddrBox = new System.Windows.Forms.TextBox();
@@ -55,17 +66,12 @@
             this.phoneBox = new System.Windows.Forms.TextBox();
             this.mobilePhoneBox = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.empID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.empName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loginName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loginPwd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dept = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.post = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.家庭电话 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label8 = new System.Windows.Forms.Label();
+            this.deptBox = new System.Windows.Forms.TextBox();
+            this.sexBox = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.postBox = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -153,8 +159,7 @@
             "员工职位"});
             this.keyTypeBox.Items.AddRange(new object[] {
             "编号",
-            "供应商名称",
-            "负责人姓名"});
+            "员工姓名"});
             this.keyTypeBox.Name = "keyTypeBox";
             this.keyTypeBox.Size = new System.Drawing.Size(121, 28);
             // 
@@ -196,132 +201,12 @@
             this.家庭电话,
             this.phone,
             this.address});
-            this.dataGridView1.Location = new System.Drawing.Point(49, 227);
+            this.dataGridView1.Location = new System.Drawing.Point(49, 245);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(705, 193);
+            this.dataGridView1.Size = new System.Drawing.Size(705, 227);
             this.dataGridView1.TabIndex = 26;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // loginPwdBox
-            // 
-            this.loginPwdBox.Location = new System.Drawing.Point(499, 72);
-            this.loginPwdBox.Name = "loginPwdBox";
-            this.loginPwdBox.ReadOnly = true;
-            this.loginPwdBox.Size = new System.Drawing.Size(230, 25);
-            this.loginPwdBox.TabIndex = 24;
-            // 
-            // loginNameBox
-            // 
-            this.loginNameBox.Location = new System.Drawing.Point(149, 75);
-            this.loginNameBox.Name = "loginNameBox";
-            this.loginNameBox.ReadOnly = true;
-            this.loginNameBox.Size = new System.Drawing.Size(230, 25);
-            this.loginNameBox.TabIndex = 22;
-            // 
-            // empAddrBox
-            // 
-            this.empAddrBox.Location = new System.Drawing.Point(149, 149);
-            this.empAddrBox.Multiline = true;
-            this.empAddrBox.Name = "empAddrBox";
-            this.empAddrBox.ReadOnly = true;
-            this.empAddrBox.Size = new System.Drawing.Size(583, 50);
-            this.empAddrBox.TabIndex = 21;
-            // 
-            // empNameBox
-            // 
-            this.empNameBox.Location = new System.Drawing.Point(149, 33);
-            this.empNameBox.Name = "empNameBox";
-            this.empNameBox.ReadOnly = true;
-            this.empNameBox.Size = new System.Drawing.Size(230, 25);
-            this.empNameBox.TabIndex = 20;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 113);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 15);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "家庭电话";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(406, 75);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 15);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "密码";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(406, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 15);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "出生日期";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 154);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 15);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "地址：";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 15);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "系统登录名";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 15);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "员工姓名";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(409, 123);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 15);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "手机号码";
-            // 
-            // phoneBox
-            // 
-            this.phoneBox.Location = new System.Drawing.Point(149, 110);
-            this.phoneBox.Name = "phoneBox";
-            this.phoneBox.ReadOnly = true;
-            this.phoneBox.Size = new System.Drawing.Size(230, 25);
-            this.phoneBox.TabIndex = 28;
-            // 
-            // mobilePhoneBox
-            // 
-            this.mobilePhoneBox.Location = new System.Drawing.Point(499, 113);
-            this.mobilePhoneBox.Name = "mobilePhoneBox";
-            this.mobilePhoneBox.ReadOnly = true;
-            this.mobilePhoneBox.Size = new System.Drawing.Size(230, 25);
-            this.mobilePhoneBox.TabIndex = 29;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(499, 36);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(230, 25);
-            this.dateTimePicker1.TabIndex = 30;
             // 
             // empID
             // 
@@ -383,11 +268,193 @@
             this.address.Name = "address";
             this.address.Visible = false;
             // 
+            // loginPwdBox
+            // 
+            this.loginPwdBox.Location = new System.Drawing.Point(499, 72);
+            this.loginPwdBox.Name = "loginPwdBox";
+            this.loginPwdBox.ReadOnly = true;
+            this.loginPwdBox.Size = new System.Drawing.Size(230, 25);
+            this.loginPwdBox.TabIndex = 24;
+            this.loginPwdBox.UseSystemPasswordChar = true;
+            // 
+            // loginNameBox
+            // 
+            this.loginNameBox.Location = new System.Drawing.Point(149, 75);
+            this.loginNameBox.Name = "loginNameBox";
+            this.loginNameBox.ReadOnly = true;
+            this.loginNameBox.Size = new System.Drawing.Size(230, 25);
+            this.loginNameBox.TabIndex = 22;
+            // 
+            // empAddrBox
+            // 
+            this.empAddrBox.Location = new System.Drawing.Point(499, 190);
+            this.empAddrBox.Multiline = true;
+            this.empAddrBox.Name = "empAddrBox";
+            this.empAddrBox.ReadOnly = true;
+            this.empAddrBox.Size = new System.Drawing.Size(230, 25);
+            this.empAddrBox.TabIndex = 21;
+            // 
+            // empNameBox
+            // 
+            this.empNameBox.Location = new System.Drawing.Point(149, 33);
+            this.empNameBox.Name = "empNameBox";
+            this.empNameBox.ReadOnly = true;
+            this.empNameBox.Size = new System.Drawing.Size(230, 25);
+            this.empNameBox.TabIndex = 20;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(46, 113);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 15);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "家庭电话";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(406, 75);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 15);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "密码";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(406, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 15);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "出生日期";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(406, 200);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "地址：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(46, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "系统登录名";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "员工姓名";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(409, 123);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 15);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "手机号码";
+            // 
+            // phoneBox
+            // 
+            this.phoneBox.Location = new System.Drawing.Point(149, 110);
+            this.phoneBox.Name = "phoneBox";
+            this.phoneBox.ReadOnly = true;
+            this.phoneBox.Size = new System.Drawing.Size(230, 25);
+            this.phoneBox.TabIndex = 28;
+            // 
+            // mobilePhoneBox
+            // 
+            this.mobilePhoneBox.Location = new System.Drawing.Point(499, 113);
+            this.mobilePhoneBox.Name = "mobilePhoneBox";
+            this.mobilePhoneBox.ReadOnly = true;
+            this.mobilePhoneBox.Size = new System.Drawing.Size(230, 25);
+            this.mobilePhoneBox.TabIndex = 29;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Enabled = false;
+            this.dateTimePicker1.Location = new System.Drawing.Point(499, 36);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(230, 25);
+            this.dateTimePicker1.TabIndex = 30;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(46, 153);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(37, 15);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "性别";
+            // 
+            // deptBox
+            // 
+            this.deptBox.Location = new System.Drawing.Point(499, 150);
+            this.deptBox.Name = "deptBox";
+            this.deptBox.ReadOnly = true;
+            this.deptBox.Size = new System.Drawing.Size(230, 25);
+            this.deptBox.TabIndex = 32;
+            // 
+            // sexBox
+            // 
+            this.sexBox.Enabled = false;
+            this.sexBox.FormattingEnabled = true;
+            this.sexBox.Items.AddRange(new object[] {
+            "男",
+            "女"});
+            this.sexBox.Location = new System.Drawing.Point(149, 151);
+            this.sexBox.Name = "sexBox";
+            this.sexBox.Size = new System.Drawing.Size(230, 23);
+            this.sexBox.TabIndex = 33;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(406, 160);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 15);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "部门";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(50, 193);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 15);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "岗位";
+            // 
+            // postBox
+            // 
+            this.postBox.Location = new System.Drawing.Point(149, 190);
+            this.postBox.Name = "postBox";
+            this.postBox.ReadOnly = true;
+            this.postBox.Size = new System.Drawing.Size(230, 25);
+            this.postBox.TabIndex = 36;
+            // 
             // EmployeeInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 450);
+            this.ClientSize = new System.Drawing.Size(862, 502);
+            this.Controls.Add(this.postBox);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.sexBox);
+            this.Controls.Add(this.deptBox);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.mobilePhoneBox);
             this.Controls.Add(this.phoneBox);
@@ -453,5 +520,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn loginPwd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 家庭电话;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox deptBox;
+        private System.Windows.Forms.ComboBox sexBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox postBox;
     }
 }

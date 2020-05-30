@@ -97,7 +97,7 @@ namespace WindowsFormsApp1.GoodMethod
         public Boolean Delete(tb_Employee employee)
         {
             string sqlDelete = "update tb_EmpInfo  set ";
-            sqlDelete += "EmpFlag='" + employee.intEmpFlag + "' where ComID ='" + employee.intEmpID + "'";
+            sqlDelete += "EmpFlag='" + employee.intEmpFlag + "' where EmpID ='" + employee.intEmpID + "'";
             try
             {
                 SqlConnection conn = (new GetSqlConnection()).GetCon();
