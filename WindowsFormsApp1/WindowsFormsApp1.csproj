@@ -72,6 +72,7 @@
     <Compile Include="EmployeeInfoForm.Designer.cs">
       <DependentUpon>EmployeeInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Feedback.cs" />
     <Compile Include="GoodMethod\tb_CompanyMethod.cs" />
     <Compile Include="GoodMethod\GetSqlConnection.cs" />
     <Compile Include="GoodMethod\tb_EmployeeMethod.cs" />
@@ -130,9 +131,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataBackupForm.resx">
       <DependentUpon>DataBackupForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataRestore.resx">
-      <DependentUpon>DataRestore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeInfoForm.resx">
       <DependentUpon>EmployeeInfoForm.cs</DependentUpon>

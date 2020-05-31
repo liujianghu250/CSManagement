@@ -50,17 +50,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtGoodsTime = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label12 = new System.Windows.Forms.Label();
             this.txtDepotName = new System.Windows.Forms.TextBox();
             this.txtGoodsUnit = new System.Windows.Forms.TextBox();
@@ -76,8 +65,9 @@
             this.keyText = new System.Windows.Forms.ToolStripTextBox();
             this.queryButton = new System.Windows.Forms.ToolStripButton();
             this.exitButton = new System.Windows.Forms.ToolStripButton();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtGoodsID
@@ -263,75 +253,6 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "进货时间：";
             // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(50, 397);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(690, 197);
-            this.listView1.TabIndex = 22;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "商品编号";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "商品名称";
-            this.columnHeader2.Width = 120;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "供应商";
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "进货员";
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "仓库";
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "数量";
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "计量单位";
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "进货价格";
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "销售价格";
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "应付金额";
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "实付金额";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -471,18 +392,28 @@
             this.exitButton.Text = "退出";
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(53, 320);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 27;
+            this.dataGridView1.Size = new System.Drawing.Size(690, 197);
+            this.dataGridView1.TabIndex = 32;
             
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
+            // 
             // JhGoodsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 598);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txtGoodsUnit);
             this.Controls.Add(this.txtDepotName);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtGoodsTime);
             this.Controls.Add(this.label10);
@@ -509,6 +440,7 @@
             this.Text = "JhGoodsForm";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,21 +470,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker txtGoodsTime;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtDepotName;
         private System.Windows.Forms.TextBox txtGoodsUnit;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton saveButton;
         private System.Windows.Forms.ToolStripButton cancelButton;
@@ -564,6 +485,6 @@
         private System.Windows.Forms.ToolStripTextBox keyText;
         private System.Windows.Forms.ToolStripButton queryButton;
         private System.Windows.Forms.ToolStripButton exitButton;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
