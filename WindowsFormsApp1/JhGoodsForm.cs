@@ -34,7 +34,11 @@ namespace WindowsFormsApp1
         //反馈成员变量，用于多个窗口同时更新
         private static Feedback feedback = new Feedback();
 
-
+        //析构函数
+        ~JhGoodsForm()
+        {
+            feedback.DeleteJhGoodsForm(this);
+        }
 
         private void txtGoodsID_TextChanged(object sender, EventArgs e)
         {
@@ -381,7 +385,7 @@ namespace WindowsFormsApp1
             DataGridViewRow dgvr = dataGridView1.CurrentRow;
 
             txtGoodsID.Text = dgvr.Cells[0].Value.ToString();
-            txtEmpID.Text = dgvr.Cells[1].Value.ToString();
+            
             txtJhCompName.Text = dgvr.Cells[2].Value.ToString();
             txtDepotName.Text = dgvr.Cells[3].Value.ToString();
             txtGoodsName.Text = dgvr.Cells[4].Value.ToString();

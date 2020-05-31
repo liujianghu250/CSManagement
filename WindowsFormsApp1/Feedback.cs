@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
         //
         //装载全部进货窗口的列表
         private List<JhGoodsForm> jhGoodsForms;
-        //将进货窗口装入
+        //将进货窗口装入list
         public void CreateJhGoodsForm(JhGoodsForm jh)
         {
             jhGoodsForms.Add(jh);
@@ -32,12 +32,17 @@ namespace WindowsFormsApp1
                 jhGoodsForms[i].FeedbackUseUpdate();
             }
         }
+        //关闭窗口将其从list中装入
+        public void DeleteJhGoodsForm(JhGoodsForm jh)
+        {
+            jhGoodsForms.Remove(jh);
+        }
         //
 
         //
         //装载CompanyInfoForm的列表
         private List<CompanyInfoForm> companyInfoForms;
-        //将公司信息窗口装入
+        //将公司信息窗口装入list
         public void CreateCompanyInfoForm(CompanyInfoForm company)
         {
             companyInfoForms.Add(company);
@@ -50,12 +55,17 @@ namespace WindowsFormsApp1
                 //companyInfoForms[i].FeedbackUseUpdate();
             }
         }
+        //关闭窗口将其从list中装入
+        public void DeleteCompanyInfoForm(CompanyInfoForm company)
+        {
+            companyInfoForms.Remove(company);
+        }
         //
 
         //
         //装载EmployeeInfoForm的列表
         private List<EmployeeInfoForm> employeeInfoForms;
-        //将员工信息窗口装入
+        //将员工信息窗口装入list
         public void CreateEmployeeInfoForm(EmployeeInfoForm employee)
         {
             employeeInfoForms.Add(employee);
@@ -67,6 +77,11 @@ namespace WindowsFormsApp1
             {
                 //employeeInfoForms[i].FeedbackUseUpdate();
             }
+        }
+        //关闭窗口将其从list中装入
+        public void DeleteEmployeeInfoForm(EmployeeInfoForm employee)
+        {
+            employeeInfoForms.Remove(employee);
         }
         //
 
