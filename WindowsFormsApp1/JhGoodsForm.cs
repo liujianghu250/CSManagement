@@ -19,14 +19,25 @@ namespace WindowsFormsApp1
         public JhGoodsForm()
         {
             InitializeComponent();
-            UpdateListView();
-            
+            UpdateDataGridView();
+            feedback.CreateJhGoodsForm(this);
+
         }
+
         //主要使用此构造方法
-        public JhGoodsForm(string EmpID):this()
+        public JhGoodsForm(string EmpID) : this()
         {
             //从登陆界面读取工作人员名。
             txtEmpID.Text = EmpID;
+        }
+
+        //反馈成员变量，用于多个窗口同时更新
+        private static Feedback feedback = new Feedback();
+
+        //析构函数
+        ~JhGoodsForm()
+        {
+            feedback.DeleteJhGoodsForm(this);
         }
 
         private void txtGoodsID_TextChanged(object sender, EventArgs e)
@@ -51,27 +62,28 @@ namespace WindowsFormsApp1
             {
                 double result = 0;
                 int i;
-                for(i=0;source[i]!='.';i++)
+                for (i = 0; source[i] != '.'; i++)
                 {
                     result = result * 10 + (source[i] - '0');
                 }
-                
+
                 int potPosition = ++i;
-                for(;i<source.Length;i++)
+                for (; i < source.Length; i++)
                 {
                     result = result * 10 + (source[i] - '0');
                 }
-                for(int j=0;j<source.Length-potPosition;j++)
+                for (int j = 0; j < source.Length - potPosition; j++)
                 {
                     result /= 10;
                 }
                 return result;
             }
         }
+
         //功能函数，执行数据库插入语句，同时会检查输入是否正确。
         private void InsertIntoSql()
         {
-            if(!InfoCheck())
+            if (!InfoCheck())
             {
                 MessageBox.Show("信息错误:信息空缺或错误！");
                 return;
@@ -99,7 +111,7 @@ namespace WindowsFormsApp1
             sqlCommand.Parameters.AddWithValue("@Flag", 0);
             try
             { int r = sqlCommand.ExecuteNonQuery(); }
-            catch(SqlException)
+            catch (SqlException)
             {
                 MessageBox.Show("插入信息错误，请检查是否商品编号重复");
                 //打开查询界面
@@ -107,6 +119,41 @@ namespace WindowsFormsApp1
             }
             sqlConnection.Close();
         }
+        //功能函数，执行数据库更新语句
+        private void UpdateByGoodsID()
+        {
+            if (!InfoCheck())
+            {
+                MessageBox.Show("信息错误:信息空缺或错误！");
+                return;
+            }
+            SqlConnection sqlConnection = new GetSqlConnection().GetCon();//连接数据库
+            string sql = "update dbo.tb_JhGoodsInfo set ";
+            sql += "EmpID ='" + txtEmpID.Text + "' ,DepotName='" + txtDepotName.Text + "',JhCompName='" + txtJhCompName.Text;
+            sql += "',GoodsName='" + txtGoodsName.Text + "',GoodsNum=" + txtGoodsNum.Text + ",GoodsUnit='" + txtGoodsUnit.Text;
+            sql += "',GoodsJhPrice='" + txtGoodsJhPrice.Text + "',GoodsSellPrice='" + txtGoodsSellPrice.Text;
+            sql += "',GoodsNeedPrice='" + txtGoodsNeedPrice.Text + "',GoodsNoPrice='" + txtGoodsNoPrice.Text;
+            sql += "',GoodsRemark='" + txtGoodsRemark.Text + "',GoodsTime='" + txtGoodsTime.Value + "',Flag=0";
+            sql += " where GoodsID='" + txtGoodsID.Text + "'";
+
+
+            SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
+            try
+            { int r = sqlCommand.ExecuteNonQuery(); }
+            catch (SqlException)
+            {
+                MessageBox.Show("插入信息错误，请检查是否商品编号重复");
+                //打开查询界面
+
+            }
+            sqlConnection.Close();
+
+
+
+
+
+        }
+
         //功能函数，执行数据库删除语句
         private void DeleteByGoodsID()
         {
@@ -120,63 +167,66 @@ namespace WindowsFormsApp1
 
                 sqlConnection.Close();
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 MessageBox.Show("数据库连接失败！");
-            }  
+            }
         }
-        //功能函数，随着数据库语句的执行，刷新ListView
-        private void UpdateListView()
+
+        //使用lock防止多进程同时使用数据库语言
+        private static readonly object objlock = new object();
+        private void UseSqlCommand(int codeKind)
         {
-            listView1.Items.Clear();
+            lock (objlock)
+            {
+                switch (codeKind)
+                {
+                    case 0: { InsertIntoSql(); break; }
+                    case 1: { UpdateByGoodsID(); break; }
+                    case 2: { DeleteByGoodsID(); break; }
+                    default: { break; }
+                }
+            }
+        }
+
+        //功能函数，随着数据库语句的执行，刷新DataGridView
+        private void UpdateDataGridView()
+        {
+
             try
             {
                 SqlConnection sqlConnection = new GetSqlConnection().GetCon();//连接数据库
                 SqlCommand cmd = new SqlCommand("select * from dbo.tb_JhGoodsInfo", sqlConnection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    ListViewItem item = new ListViewItem((string)dataReader["GoodsID"]);
-                    item.SubItems.Add((string)dataReader["GoodsName"]);
-                    item.SubItems.Add((string)dataReader["JhCompName"]);
-                    item.SubItems.Add((string)dataReader["EmpID"]);
-                    item.SubItems.Add((string)dataReader["DepotName"]);
-                    item.SubItems.Add(dataReader["GoodsNum"].ToString());
-                    item.SubItems.Add((string)dataReader["GoodsUnit"]);
-                    item.SubItems.Add((string)dataReader["GoodsJhPrice"]);
-                    item.SubItems.Add((string)dataReader["GoodsSellPrice"]);
-                    item.SubItems.Add((string)dataReader["GoodsNeedPrice"]);
-                    item.SubItems.Add((string)dataReader["GoodsNoPrice"]);
-                    listView1.Items.Add(item);
-                }
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = dataReader;
+                this.dataGridView1.DataSource = bindingSource;
+                dataGridView1.Columns[0].HeaderCell.Value = "商品ID";
+                dataGridView1.Columns[1].HeaderCell.Value = "员工";
+                dataGridView1.Columns[2].HeaderCell.Value = "进货公司";
+                dataGridView1.Columns[3].HeaderCell.Value = "仓库";
+                dataGridView1.Columns[4].HeaderCell.Value = "商品名称";
+                dataGridView1.Columns[5].HeaderCell.Value = "数量";
+                dataGridView1.Columns[6].HeaderCell.Value = "计量单位";
+                dataGridView1.Columns[7].HeaderCell.Value = "进价";
+                dataGridView1.Columns[8].HeaderCell.Value = "售价";
+                dataGridView1.Columns[9].HeaderCell.Value = "应付价格";
+                dataGridView1.Columns[10].HeaderCell.Value = "实付价格";
+                dataGridView1.Columns[11].HeaderCell.Value = "备注";
+                dataGridView1.Columns[12].HeaderCell.Value = "时间";
+
+
                 dataReader.Close();
                 sqlConnection.Close();
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 MessageBox.Show("数据库连接失败");
             }
-            
-        }
-
-        //ListView选其中一行，将其数据复制到文本框中
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listView1.SelectedItems.Count == 0)
-                return;
-            txtGoodsID.Text= listView1.SelectedItems[0].Text;
-            txtGoodsName.Text = listView1.SelectedItems[0].SubItems[1].Text;
-            txtJhCompName.Text= listView1.SelectedItems[0].SubItems[2].Text;
-            txtDepotName.Text= listView1.SelectedItems[0].SubItems[3].Text;
-            txtGoodsNum.Text= listView1.SelectedItems[0].SubItems[4].Text;
-            txtGoodsUnit.Text= listView1.SelectedItems[0].SubItems[5].Text;
-            txtGoodsJhPrice.Text= listView1.SelectedItems[0].SubItems[6].Text;
-            txtGoodsSellPrice.Text= listView1.SelectedItems[0].SubItems[7].Text;
-            //txtGoodsNeedPrice.Text= listView1.SelectedItems[0].SubItems[8].Text;
-            txtGoodsNoPrice.Text= listView1.SelectedItems[0].SubItems[9].Text;
 
         }
-        
+
+
 
         private void txtJhCompName_TextChanged(object sender, EventArgs e)
         {
@@ -255,29 +305,30 @@ namespace WindowsFormsApp1
                 return true;
         }
 
-        //删除按钮
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            DeleteByGoodsID();
-            UpdateListView();
-        }
+
         //增加按钮
         private void addButton_Click(object sender, EventArgs e)
         {
-            InsertIntoSql();
-            UpdateListView();
+            UseSqlCommand(0);
+            feedback.UpdateJhGoodsForm();
         }
         //修改按钮
         private void updateButton_Click(object sender, EventArgs e)
         {
-            DeleteByGoodsID();
-            InsertIntoSql();
-            UpdateListView();
+            UseSqlCommand(1);
+            feedback.UpdateJhGoodsForm();
         }
+        //删除按钮
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            UseSqlCommand(2);
+            feedback.UpdateJhGoodsForm();
+        }
+
         //查询按钮
         private void queryButton_Click(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            
             SqlConnection sqlConnection = new GetSqlConnection().GetCon();
             string sql = "select * from dbo.tb_JhGoodsInfo where ";
             switch (keyType.SelectedIndex)
@@ -293,26 +344,14 @@ namespace WindowsFormsApp1
             {
                 SqlCommand cmd = new SqlCommand(sql, sqlConnection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    
-                    ListViewItem item = new ListViewItem((string)dataReader["GoodsID"]);
-                    item.SubItems.Add((string)dataReader["GoodsName"]);
-                    item.SubItems.Add((string)dataReader["JhCompName"]);
-                    item.SubItems.Add((string)dataReader["EmpID"]);
-                    item.SubItems.Add((string)dataReader["DepotName"]);
-                    item.SubItems.Add(dataReader["GoodsNum"].ToString());
-                    item.SubItems.Add((string)dataReader["GoodsUnit"]);
-                    item.SubItems.Add((string)dataReader["GoodsJhPrice"]);
-                    item.SubItems.Add((string)dataReader["GoodsSellPrice"]);
-                    item.SubItems.Add((string)dataReader["GoodsNeedPrice"]);
-                    item.SubItems.Add((string)dataReader["GoodsNoPrice"]);
-                    listView1.Items.Add(item);
-                }
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = dataReader;
+                this.dataGridView1.DataSource = bindingSource;
+                
                 if (!dataReader.HasRows)
                 {
-                    ListViewItem item = new ListViewItem("无查询结果");
-                    listView1.Items.Add(item);
+                    MessageBox.Show("无查询结果");
+                    
                 }
                 dataReader.Close();
                 sqlConnection.Close();
@@ -325,6 +364,7 @@ namespace WindowsFormsApp1
         //退出按钮
         private void exitButton_Click(object sender, EventArgs e)
         {
+
             this.Close();
         }
 
@@ -332,5 +372,38 @@ namespace WindowsFormsApp1
         {
             keyType.Text = keyType.SelectedText;
         }
+
+        private void JhGoodsForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //DataGridView 选中一行而更新界面显示
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow dgvr = dataGridView1.CurrentRow;
+
+            txtGoodsID.Text = dgvr.Cells[0].Value.ToString();
+            
+            txtJhCompName.Text = dgvr.Cells[2].Value.ToString();
+            txtDepotName.Text = dgvr.Cells[3].Value.ToString();
+            txtGoodsName.Text = dgvr.Cells[4].Value.ToString();
+            txtGoodsNum.Text = dgvr.Cells[5].Value.ToString();
+            txtGoodsUnit.Text = dgvr.Cells[6].Value.ToString();
+            txtGoodsJhPrice.Text = dgvr.Cells[7].Value.ToString();
+            txtGoodsSellPrice.Text = dgvr.Cells[8].Value.ToString();
+            txtGoodsNoPrice.Text = dgvr.Cells[10].Value.ToString();
+            txtGoodsRemark.Text = dgvr.Cells[11].Value.ToString();
+
+        }
+
+        //
+        public void FeedbackUseUpdate()
+        {
+            UpdateDataGridView();
+        }
+
+        
     }
 }
