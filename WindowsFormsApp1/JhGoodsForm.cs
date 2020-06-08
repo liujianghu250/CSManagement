@@ -11,6 +11,7 @@ using WindowsFormsApp1.GoodMethod;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Reflection;
 
 namespace WindowsFormsApp1
 {
@@ -21,6 +22,9 @@ namespace WindowsFormsApp1
             InitializeComponent();
             UpdateDataGridView();
             feedback.CreateJhGoodsForm(this);
+            Type type = dataGridView1.GetType();
+            PropertyInfo pi = type.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+            pi.SetValue(dataGridView1, true, null);
 
         }
 
@@ -192,11 +196,16 @@ namespace WindowsFormsApp1
         //功能函数，随着数据库语句的执行，刷新DataGridView
         private void UpdateDataGridView()
         {
+            
 
+            //增加对当前行的锁定。
+            int currentRow = -1;
+            if (dataGridView1.SelectedRows.Count != 0)
+                currentRow = dataGridView1.CurrentRow.Index;
             try
             {
                 SqlConnection sqlConnection = new GetSqlConnection().GetCon();//连接数据库
-                SqlCommand cmd = new SqlCommand("select * from dbo.tb_JhGoodsInfo", sqlConnection);
+                SqlCommand cmd = new SqlCommand("select * from dbo.tb_JhGoodsInfo order by GoodsID asc", sqlConnection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
                 BindingSource bindingSource = new BindingSource();
                 bindingSource.DataSource = dataReader;
@@ -223,7 +232,12 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("数据库连接失败");
             }
-
+            if(currentRow!=-1)
+            {
+                dataGridView1.Rows[0].Selected = false;
+                dataGridView1.Rows[currentRow].Selected = true;
+                dataGridView1.FirstDisplayedScrollingRowIndex = currentRow;
+            }
         }
 
 
@@ -383,6 +397,7 @@ namespace WindowsFormsApp1
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewRow dgvr = dataGridView1.CurrentRow;
+            //获取点击行的数据
 
             txtGoodsID.Text = dgvr.Cells[0].Value.ToString();
             
@@ -395,15 +410,27 @@ namespace WindowsFormsApp1
             txtGoodsSellPrice.Text = dgvr.Cells[8].Value.ToString();
             txtGoodsNoPrice.Text = dgvr.Cells[10].Value.ToString();
             txtGoodsRemark.Text = dgvr.Cells[11].Value.ToString();
-
+            
         }
-
+        
         //
         public void FeedbackUseUpdate()
         {
             UpdateDataGridView();
         }
 
-        
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            txtGoodsID.Text = "";
+            txtJhCompName.Text = "";
+            txtDepotName.Text = "";
+            txtGoodsName.Text = "";
+            txtGoodsNum.Text = "";
+            txtGoodsUnit.Text = "";
+            txtGoodsJhPrice.Text = "";
+            txtGoodsSellPrice.Text = "";
+            txtGoodsNoPrice.Text = "";
+            txtGoodsRemark.Text = "";
+        }
     }
 }
