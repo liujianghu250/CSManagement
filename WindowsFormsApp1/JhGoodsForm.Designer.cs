@@ -316,12 +316,13 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Enabled = false;
             this.cancelButton.Image = global::WindowsFormsApp1.Properties.Resources.取消;
             this.cancelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 25);
-            this.cancelButton.Text = "取消";
+            this.cancelButton.Text = "清除";
+            this.cancelButton.ToolTipText = "清除";
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // deleteButton
             // 
@@ -398,6 +399,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(50, 398);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(690, 197);
             this.dataGridView1.TabIndex = 32;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);

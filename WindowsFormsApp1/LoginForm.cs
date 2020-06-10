@@ -44,9 +44,7 @@ namespace WindowsFormsApp1
                 frm.Show();*/
                 JhGoodsForm jhGoodsForm = new JhGoodsForm("YH");
                 jhGoodsForm.Show();
-                JhGoodsForm jhGoodsForm1 = new JhGoodsForm("YHH");
-                jhGoodsForm1.Show();
-                JhGoodsForm jhGoodsForm2 = new JhGoodsForm("YHHHH");
+                JhGoodsForm jhGoodsForm2 = new JhGoodsForm("DJ");
                 jhGoodsForm2.Show();
                 /*CompanyInfoForm companyInfoForm = new CompanyInfoForm();
                 companyInfoForm.Show();*/
